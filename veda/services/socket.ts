@@ -1,7 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 
-// Always connect directly to the backend since Vercel/NextJS serverless does not support proxying open WebSockets via rewrites
-const SOCKET_SERVER_URL = process.env.NEXT_PUBLIC_API_URL || 'https://veda-ai-drcn.onrender.com';
+const SOCKET_SERVER_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
 
 export const connectSocket = (
   assignmentId: string,
