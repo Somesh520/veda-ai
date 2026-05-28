@@ -77,7 +77,7 @@ export const initQueueWorker = () => {
         console.log(`👷 [worker] Generation successfully completed for Assignment: ${assignmentId}`);
         
         // 6. Broadcast successful completion payload to WebSocket rooms
-        notifyAssignmentUpdate(assignmentId, 'COMPLETED', assignment);
+        notifyAssignmentUpdate(assignmentId, 'COMPLETED', assignment.toJSON());
         
       } catch (error: any) {
         console.error(`❌ [worker] Failed to process Assignment ${assignmentId}:`, error);

@@ -1,11 +1,13 @@
 import { io, Socket } from 'socket.io-client';
 
-// Use same host for proxying websocket
+// Always connect directly to the backend since Vercel/NextJS serverless does not support proxying open WebSockets via rewrites
+const SOCKET_SERVER_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5001';
+
 export const connectSocket = (
   assignmentId: string,
   onUpdate: (data: { assignmentId: string; status: string; data?: any }) => void
 ): Socket => {
-  const socket = io(); // empty string defaults to current host and path
+  const socket = io(SOCKET_SERVER_URL);
 
   socket.on('connect', () => {
     console.log(`🔌 Connected to WebSocket Server for assignment: ${assignmentId}`);
