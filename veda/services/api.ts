@@ -1,6 +1,8 @@
 import { IAssignment } from '../types/assignment';
 
-const API_BASE_URL = '/api/assignments';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL 
+  ? `${process.env.NEXT_PUBLIC_API_URL}/api/assignments` 
+  : 'https://veda-ai-drcn.onrender.com/api/assignments';
 
 export const fetchAssignments = async (): Promise<IAssignment[]> => {
   const response = await fetch(API_BASE_URL);
