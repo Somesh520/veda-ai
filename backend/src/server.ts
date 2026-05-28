@@ -16,8 +16,14 @@ const server = http.createServer(app);
 
 const PORT = process.env.PORT || 5001;
 
+// CORS options setup to limit origins while in production
+const corsOptions = {
+  origin: process.env.FRONTEND_URL ? [process.env.FRONTEND_URL, 'http://localhost:3000'] : '*',
+  credentials: true,
+};
+
 // Middlewares
-app.use(cors({ origin: '*' })); // Enable global CORS
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

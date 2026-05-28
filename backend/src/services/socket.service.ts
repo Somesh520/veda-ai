@@ -8,10 +8,15 @@ let io: SocketIOServer | null = null;
  * Enables real-time reactive event broadcasts across dedicated room channels.
  */
 export const initSocketServer = (server: HTTPServer): SocketIOServer => {
+  const allowedOrigins = process.env.FRONTEND_URL 
+    ? [process.env.FRONTEND_URL, 'http://localhost:3000'] 
+    : '*';
+
   io = new SocketIOServer(server, {
     cors: {
-      origin: '*', // Enforce open CORS rules for client next.js connections
-      methods: ['GET', 'POST'],
+      origin: allowedOrigins,
+      methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+      credentials: true,
     },
   });
 
